@@ -1,27 +1,59 @@
 # Personal data (user fills these)
 cv.md
-data/applications.md
-data/applications.db
-data/follow-ups.md
-data/pipeline.md
-data/scan-history.tsv
-data/pdf-index.tsv
-data/parser-output/**/*.json
-!data/parser-output/.gitkeep
-!data/parser-output/**/.gitkeep
-data/cache/ats-companies/
+/article-digest.md
+/voice-dna.md
+/local/
+# Data-root marker: a path on this machine only.
+/.career-ops-data
+# Legacy root-layout tracker and its derived index (see .gitignore).
+/applications.md
+/follow-ups.md
+*.db
+*.db-wal
+*.db-shm
+# Everything under data/ is generated or personal at runtime. Blanket rule plus
+# an allowlist of placeholders, mirroring .gitignore: a per-filename list let
+# contacts.tsv, Connections.csv, status-log.tsv, salary-observations.tsv,
+# career-profile.yml and every later addition ship in the tarball.
+/data/*
+!/data/.gitkeep
+!/data/offers/
+/data/offers/*
+!/data/offers/.gitkeep
+!/data/parser-output/
+/data/parser-output/**
+!/data/parser-output/**/
+!/data/parser-output/.gitkeep
+!/data/parser-output/**/.gitkeep
 reports/*.md
+reports/**/*.md
 !reports/.gitkeep
 output/*
 !output/.gitkeep
+# batch/ holds generated worker output; ship only the tracked scaffolding.
+/batch/*
+!/batch/README.md
+!/batch/aggregate-tokens.mjs
+!/batch/batch-prompt.md
+!/batch/batch-runner.sh
+!/batch/company-scope.mjs
+!/batch/jd-rescue.mjs
+!/batch/logs
+!/batch/tracker-additions
 batch/logs/*
 !batch/logs/.gitkeep
-batch/batch-state.tsv
-batch/batch-input.tsv
-batch/tracker-additions/**/*.tsv
+batch/tracker-additions/*
 !batch/tracker-additions/.gitkeep
 jds/*
 !jds/.gitkeep
+
+# Profile intake sources (master CV, LinkedIn export, diplomas, references).
+/documents/*
+!/documents/.gitkeep
+!/documents/README.md
+
+# Atomic-write temp files can hold a byte-for-byte copy of cv.md / profile.yml.
+*.tmp*
 
 # Personal documents — never commit scans or copies of these (PII).
 # Catches common identity/credential filenames so they can't be staged by accident.
@@ -47,11 +79,16 @@ writing-samples/*
 
 # User config and customization (never auto-updated)
 config/profile.yml
+config/cv-facts.json
+config/benchmarks.yml
+config/local-paths.txt
 portals.yml
 modes/_profile.md
 modes/_custom.md
+modes/_brief.md
 .update-dismissed
 .update-lock
+.manifesto-noted
 
 # Plugin layer — opt-in toggles + user-installed plugins + integrity lock (never auto-updated)
 config/plugins.yml
@@ -96,6 +133,12 @@ data/model-blacklist.json
 .claude/memory/
 .opencode/settings.local.json
 .opencode/memory/
+# Personal MCP/model config and agent rules (may hold credentials).
+opencode.json
+.mcp.json
+.hermes.md
+.career-ops.env
+.career-ops-web/
 career-dashboard
 career-dashboard.exe
 package-lock.json
